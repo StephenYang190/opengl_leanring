@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Common setting
 PROJECT_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd -P )"
 source "$PROJECT_ROOT_DIR/docker/docker_base.sh"
@@ -9,7 +10,7 @@ case $1 in
   clion)
 PROGRAM="/home/$USER/clion/bin/clion.sh"
 ARG1=""
-  ;;
+  ;;  
   *)
 PROGRAM="/bin/bash"
 ARG1=""

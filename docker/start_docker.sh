@@ -16,15 +16,7 @@ else
       info "If Nvidia GPU available, please install 'nvidia-container-runtime'"
       info "See $INSTALATION_DOC"
 fi
-# CLION setting
-if [ "$CLION_ROOT_PATH" != "" ] && [ "$CLION_CONFIG_PATH" != "" ]; then
-      echo "Using CLION"
-      CLION_COMMAND=" \
-      --mount type=bind,source=$CLION_ROOT_PATH,target=/$HOME/clion
-      --mount type=bind,source=$CLION_CONFIG_PATH,target=$CLION_CONFIG_PATH
-      --mount type=bind,source=/$HOME/.java,target=/$HOME/.java"
-fi
-
+# general setting
 HOST_NAME=$(hostname)
 USER_ID=$(id -u)
 GRP=$(id -g -n)
@@ -61,6 +53,16 @@ fi
     if [ -f "$HOME/.gitconfig" ]; then
       GITCONFIG="-v $HOME/.gitconfig:/etc/.gitconfig"
     fi
+# Clion setting
+CLION_ROOT_PATH=""
+CLION_CONFIG_PATH=""
+if [ "$CLION_ROOT_PATH" != "" ] && [ "$CLION_CONFIG_PATH" != "" ]; then
+      echo "Using CLION"
+      CLION_COMMAND=" \
+      --mount type=bind,source=$CLION_ROOT_PATH,target=/$HOME/clion
+      --mount type=bind,source=$CLION_CONFIG_PATH,target=$CLION_CONFIG_PATH
+      --mount type=bind,source=/$HOME/.java,target=/$HOME/.java"
+fi
 # Stop container with same name
 docker container stop "$MAIN_CONTAINER_NAME" > /dev/null 2>&1
 
@@ -70,7 +72,6 @@ docker run -itd \
         --name "$MAIN_CONTAINER_NAME" \
         --privileged \
         $NVIDIA_OPTION \
-        $CLION_COMMAND \
         -e NVIDIA_DRIVER_CAPABILITIES="$NVIDIA_DRIVER_CAPABILITIES" \
         -e DOCKER_USER="$USER" \
         -e USER="$USER" \
@@ -83,6 +84,7 @@ docker run -itd \
         -e CXX=/usr/bin/g++ \
         -e DISPLAY="$display" \
         $(local_volumes) \
+        $CLION_COMMAND \
         -w $WORKDIR \
         --ipc private \
         --net host \

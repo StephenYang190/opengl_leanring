@@ -54,8 +54,6 @@ fi
       GITCONFIG="-v $HOME/.gitconfig:/etc/.gitconfig"
     fi
 # Clion setting
-CLION_ROOT_PATH=""
-CLION_CONFIG_PATH=""
 if [ "$CLION_ROOT_PATH" != "" ] && [ "$CLION_CONFIG_PATH" != "" ]; then
       echo "Using CLION"
       CLION_COMMAND=" \
@@ -115,9 +113,11 @@ docker exec -u "$USER" "$MAIN_CONTAINER_NAME" \
 # Remove sudo warning
 docker exec -u "$USER" "$MAIN_CONTAINER_NAME" \
 bash -c 'touch ~/.sudo_as_admin_successful'
-
-# Change apt source
-# docker exec -u "$USER" "$MAIN_CONTAINER_NAME" \
-# bash -c '/xurban/docker/xurban_base.sh'
+# Download jdk and zsh
+if [ "$CLION_ROOT_PATH" != "" ] && [ "$CLION_CONFIG_PATH" != "" ]; then
+      echo "Download jdk and zsh"
+      docker exec -u "$USER" "$MAIN_CONTAINER_NAME" \
+            bash -c "$WORKDIR/scripts/setup_environment.sh"
+fi
 
 ok "Now you can enter into container using: bash docker/into_docker.sh"

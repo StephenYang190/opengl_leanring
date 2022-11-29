@@ -112,7 +112,7 @@ docker exec -u "$USER" "$MAIN_CONTAINER_NAME" \
       bash -c "ln -s /etc/.gitconfig /home/$USER/.gitconfig"
 # Remove sudo warning
 docker exec -u "$USER" "$MAIN_CONTAINER_NAME" \
-bash -c 'touch ~/.sudo_as_admin_successful'
+	bash -c 'touch ~/.sudo_as_admin_successful'
 # Download jdk and zsh
 if [ "$CLION_ROOT_PATH" != "" ] && [ "$CLION_CONFIG_PATH" != "" ]; then
       echo "Download jdk and zsh"

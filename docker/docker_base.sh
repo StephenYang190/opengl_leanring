@@ -10,7 +10,7 @@ function error() {
   (>&2 echo -e "[${RED}ERROR${NO_COLOR}] $*")
 }
 # Base docker image name
-MAIN_IMAGE="nvidia/opengl:1.0-glvnd-devel-ubuntu20.04"
+MAIN_IMAGE="opengl:ubuntu20.04-opengl1.0"
 # Container name
 MAIN_CONTAINER_NAME="opengl_$USER"
 # Work directory

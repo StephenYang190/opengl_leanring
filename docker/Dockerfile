@@ -11,6 +11,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt update && \
                 build-essential \
                 sudo \
                 wget \
-                ca-certificates \
+                libxrandr-dev \
+                libxinerama-dev \
+                libxcursor-dev \
+                libxi-dev \
                 && \
     rm -rf /var/lib/apt/lists/*

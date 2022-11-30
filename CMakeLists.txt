@@ -10,7 +10,7 @@ INCLUDE_DIRECTORIES(
         glfw/include
 )
 
-add_executable(xurban src/main.cpp src/glad.c)
+add_executable(xurban src/main.cpp src/glad.c src/Shader.cpp src/Shader.h)
 
 target_link_libraries(xurban glfw ${GLFW_LIBRARIES})
 

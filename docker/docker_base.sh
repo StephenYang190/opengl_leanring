@@ -14,4 +14,4 @@ MAIN_IMAGE="opengl:ubuntu20.04-opengl1.0"
 # Container name
 MAIN_CONTAINER_NAME="opengl_$USER"
 # Work directory
-WORKDIR="/xurban"
+WORKDIR="/WORKSPACE"

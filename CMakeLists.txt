@@ -8,12 +8,19 @@ add_subdirectory(glfw)
 INCLUDE_DIRECTORIES(
         include
         glfw/include
+        src
 )
 
-add_executable(xurban src/main.cpp src/glad.c src/Shader.cpp src/Shader.h)
+add_library(glad SHARED
+        src/glad.c
+        )
 
-target_link_libraries(xurban glfw ${GLFW_LIBRARIES})
+add_subdirectory(src/util)
 
-add_executable(triangle src/triangle/triangle.cpp src/glad.c include/stb_image.h)
+add_subdirectory(src/LightLesson)
 
-target_link_libraries(triangle glfw ${GLFW_LIBRARIES})
+add_subdirectory(src/multiLight)
+
+add_executable(xurban src/main.cpp)
+
+target_link_libraries(xurban glfw ${GLFW_LIBRARIES} util glad)
